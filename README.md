@@ -1,1 +1,1 @@
-# mysite
+# mysite, sentdex tutorial
