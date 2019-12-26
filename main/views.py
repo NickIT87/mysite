@@ -26,7 +26,7 @@ def register(request):
         else:
             for msg in form.error_messages:
                 messages.error(request, f"{msg}:{form.error_messages[msg]}")
-
+    # redefined form
     form = NewUserForm
     return render(request, "main/register.html", context={"form":form})
 
