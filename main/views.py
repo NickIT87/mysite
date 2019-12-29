@@ -20,9 +20,14 @@ def single_slug(request, single_slug):
         return render(request,
                       "main/category.html",
                       {"part_ones": series_urls})
+
     tutorials = [t.tutorial_slug for t in Tutorial.objects.all()]
     if single_slug in tutorials:
-        return HttpResponse(f"{single_slug} is a tutorial !!!")
+        this_tutorial = Tutorial.objects.get(tutorial_slug = single_slug)
+
+        return render(request,
+                      "main/tutorial.html",
+                      {"tutorial":this_tutorial})
 
     return HttpResponse(f"{single_slug} does not correspond to anything.")
 
