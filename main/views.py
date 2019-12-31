@@ -24,10 +24,15 @@ def single_slug(request, single_slug):
     tutorials = [t.tutorial_slug for t in Tutorial.objects.all()]
     if single_slug in tutorials:
         this_tutorial = Tutorial.objects.get(tutorial_slug = single_slug)
+        tutorials_from_series = Tutorial.objects.filter(tutorial_series__tutorial_series=this_tutorial.tutorial_series).order_by("tutorial_published")
 
-        return render(request,
-                      "main/tutorial.html",
-                      {"tutorial":this_tutorial})
+        this_tutorial_idx = list(tutorials_from_series).index(this_tutorial)
+
+        return render(request=request,
+                      template_name="main/tutorial.html",
+                      context={"tutorial": this_tutorial,
+                       "sidebar": tutorials_from_series,
+                       "this_tutorial_idx": this_tutorial_idx})
 
     return HttpResponse(f"{single_slug} does not correspond to anything.")
 
