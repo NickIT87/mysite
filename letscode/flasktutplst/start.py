@@ -27,7 +27,3 @@ def add_message():
     messages.append(Message(text, tag))
 
     return redirect(url_for('main'))
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
