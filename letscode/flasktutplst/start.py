@@ -30,7 +30,7 @@ class Tag(db.Model):
     message = db.relationship('Message', backref=db.backref('tags', lazy=True))
 
 
-db.create_all()
+#db.create_all()
 
 
 @app.route('/', methods=['GET'])
