@@ -19,7 +19,7 @@
 <div>{{ message.text }}&nbsp;<b>#{{ message.tag }}</b></div>
 {% endfor %}
 -->
-<h3>Messages list</h3>
+<h3>Messages list {{ curusr }}</h3>
 {% for message in messages %}
 <div>{{ message.text }}&nbsp;
     {% for tag in message.tags %}

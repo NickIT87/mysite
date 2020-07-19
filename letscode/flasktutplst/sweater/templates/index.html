@@ -5,7 +5,14 @@
     <title>Greetings</title>
 </head>
 <body>
-<h1>Hello, user</h1>
+
+{% if curusr%}
+<h1>Hello, user: {{ curusr }}</h1>
+{% else %}
+<h1>Hello, Anonymus</h1>
+{% endif %}
+
 <a href="{{ url_for('main') }}">Main page</a>
+
 </body>
 </html>
