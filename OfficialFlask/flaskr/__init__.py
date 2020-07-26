@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_admin import Admin
 
 
 def create_app(test_config=None):
@@ -38,5 +39,9 @@ def create_app(test_config=None):
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
+
+    app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+    admin = Admin(app, name=(__name__+"_admin"), template_mode='bootstrap3')
+    # Add administrative views
 
     return app
