@@ -1,7 +1,7 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 # admin page creating
 from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
+from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user
 
@@ -32,8 +32,19 @@ class MyModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
 
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('hello'))
 
-admin = Admin(app)
+
+class MyAdminIndexView(AdminIndexView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+    def inaccessible_callback(self, name, **kwargs):
+        return redirect(url_for('hello'))
+
+
+admin = Admin(app, index_view=MyAdminIndexView())
 admin.add_view(MyModelView(User, db.session))
 admin.add_view(MyModelView(SuperUser, db.session))
 
@@ -49,8 +60,8 @@ def logout():
     logout_user()
     return  'Logged out'
 
-@app.route('/')
-def hello_world():
+@app.route('/hello')
+def hello():
     return 'Hello World!'
 
 
