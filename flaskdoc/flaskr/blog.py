@@ -1,0 +1,1 @@
+# continue from blog blueprint
