@@ -1,19 +1,16 @@
+import sys
 from PIL import Image
 
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.core.files.uploadedfile import InMemoryUploadedFile
+
+from io import BytesIO
+
 
 # Create your models here.
-#*****************************
-#1 Category
-#2 Product
-#3 CartProduct
-#4 Cart
-#5 Order
-#6 Customer
-#*****************************
 User = get_user_model()
 
 
@@ -74,17 +71,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        image = self.image
-        img = Image.open(image)
-        min_height, min_width = self.MIN_RESOLUTION
-        max_height, max_width = self.MAX_RESOLUTION
-        if img.height < min_height or img.width < min_width:
-            raise MinResolutionErrorException('Разрешение изображения меньше минимального!')
-        if img.height > max_height or img.width > max_width:
-            raise MaxResolutionErrorException('Разрешение изображения больше максимального!')
-        return image
 
 
 class Notebook(Product):
