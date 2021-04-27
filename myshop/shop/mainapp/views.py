@@ -7,7 +7,7 @@ from .models import Notebook, Smartphone
 def test_view(request):
     return render(request, 'base.html', {})
 
-
+#some err
 class ProductDetailView(DetailView):
 
     CT_MODEL_MODEL_CLASS = {
