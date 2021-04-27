@@ -1,24 +1,15 @@
-import sys
-from PIL import Image
-
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
-from django.core.files.uploadedfile import InMemoryUploadedFile
-
-from io import BytesIO
+from django.urls import reverse
 
 
 # Create your models here.
 User = get_user_model()
 
 
-class MinResolutionErrorException(Exception):
-    pass
-
-
-class MaxResolutionErrorException(Exception):
+def get_product_url():
     pass
 
 
@@ -55,9 +46,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    MIN_RESOLUTION = (400, 400)
-    MAX_RESOLUTION = (800, 800)
-    MAX_IMAGE_SIZE = 3145728
 
     class Meta:
         abstract = True
