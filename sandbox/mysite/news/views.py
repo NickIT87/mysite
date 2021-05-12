@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import News
+
 # Create your views here.
 def index(request):
-    #print(request)
-    return HttpResponse('<h1>news index</h1>')
-
-
-def testpage(request):
-    #print(request)
-    return HttpResponse('<h1>Test page</h1>')
+    news = News.objects.order_by('-created_at')
+    context = {
+        'news': news,
+        'title': 'news list'
+    }
+    return render(request, "news/index.html", context)
