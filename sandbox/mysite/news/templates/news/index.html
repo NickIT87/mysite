@@ -30,18 +30,27 @@
 
 <div class="container mt-3">
   <h1>{{ title }}</h1>
-  <h6>{% now "Y-m-d H:i:s" %}</h6>
+  <h6>{% now "Y-m-d H:i:s" %} news count: {{ news.count }}</h6>
   <div class="row">
     <div class="col-md-12">
       {% for item in news %}
         <div class="card mb-3">
           <div class="card-header">
-            Категория: {{ item.category }}
+            # {{ forloop.counter }} Категория: {{ item.category }}
           </div>
           <div class="card-body">
-            <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item.title }}</h5>
-            <p class="card-text">{{ item.content }}</p>
-            <a href="#" class="btn btn-primary">Read more</a>
+            <div class="media">
+              {% if item.photo %}
+                <img src="{{ item.photo.url }}" width="350" class="mr-3">
+              {% else %}
+                <img src="https://picsum.photos/id/1060/350/262/?blur=2" class="mr-3">
+              {% endif %}
+              <div class="media-body">
+                <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item.title }}</h5>
+                <p class="card-text">{{ item.content | safe | linebreaks }}</p>
+                <a href="#" class="btn btn-primary">Read more</a>
+              </div>
+            </div>
           </div>
           <div class="card-footer text-muted">
             {{ item.created_at | date:"Y-m-d H:i:s" }}
