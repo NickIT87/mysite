@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-  <title>{{ title }}</title>
+  <title>{{ category.title }}</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -29,7 +29,7 @@
 </nav>
 
 <div class="container mt-3">
-  <h1>{{ title }}</h1>
+  <h1>{{ category.title }}</h1>
   <h6>{% now "Y-m-d H:i:s" %} news count: {{ news.count }}</h6>
   <div class="row">
     <div class="col-md-2">
