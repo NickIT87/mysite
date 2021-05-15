@@ -16,10 +16,12 @@
   <h1>{% block categorytitle %}{{ title }}{% endblock %}</h1>
   <h6>{% now "Y-m-d H:i:s" %} news count: {{ news.count }}</h6>
   <div class="row">
-
-      {% block sidebar %}SIDEBAR{% endblock %}
-      {% block content %}CONTENT{% endblock %}
-
+      <div class="col-md-2">
+        {% block sidebar %}SIDEBAR{% endblock %}
+      </div>
+      <div class="col-md-10">
+        {% block content %}CONTENT{% endblock %}
+      </div>
   </div>
 </div>
 
