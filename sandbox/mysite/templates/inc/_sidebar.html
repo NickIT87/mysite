@@ -2,12 +2,13 @@
 <div class="list-group">
   {% get_list_categories as categories %}
   {% for item in categories %}
-  <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>
+  <!--<a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>-->
+  <a href="{{ item.get_absolute_url }}" class="list-group-item list-group-item-action">{{ item.title }}</a>
   {% endfor %}
 </div>
-
+{% comment %}
 <br>
 <hr>
 <br>
-
 {% show_categories arg1='inclusion' arg2='tag args' %}
+{% endcomment %}

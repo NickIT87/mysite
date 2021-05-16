@@ -12,7 +12,10 @@
   {% for item in news %}
   <div class="card mb-3">
     <div class="card-header">
-      # {{ forloop.counter }} Категория: <a href="{% url 'category' item.category.pk %}">{{ item.category }}</a>
+        {% comment %}
+          # {{ forloop.counter }} Категория: <a href="{% url 'category' item.category.pk %}">{{ item.category }}</a>
+        {% endcomment %}
+      # {{ forloop.counter }} Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
     </div>
     <div class="card-body">
       <div class="media">
@@ -23,8 +26,8 @@
         {% endif %}
         <div class="media-body">
           <h5 class="card-title {% cycle 'text-danger' 'text-success' %}">{{ item.title }}</h5>
-          <p class="card-text">{{ item.content | safe | linebreaks }}</p>
-          <a href="#" class="btn btn-primary">Read more</a>
+          <p class="card-text">{{ item.content | safe | linebreaks | truncatewords:50 }}</p>
+          <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Read more</a>
         </div>
       </div>
     </div>
