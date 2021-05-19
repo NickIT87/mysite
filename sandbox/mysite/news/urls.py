@@ -10,6 +10,7 @@ urlpatterns = [
     path('cat/<int:category_id>', NewsByCategory.as_view(
         #extra_context={'title':'extracontent'}
     ), name='category'),
-    path('news/<int:news_id>', view_news, name='view_news'),
+    #path('news/<int:news_id>', view_news, name='view_news'),
+    path('news/<int:pk>', ViewNews.as_view(), name='view_news'),
     path('news/add-news/', add_news, name='add_news'),
 ]
