@@ -1,20 +1,33 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 
 from .models import News, Category
 from .forms import NewsForm
 
 # Create your views here.
+class HomeNews(ListView):
+    model = News
+    template_name = "news/home_news_list.html"  # redefine standard template news_list.html
+    context_object_name = 'news'
+    #extra_context = {'title': 'news list',}
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'news list'
+        return context
+
+    def get_queryset(self):
+        return News.objects.filter(is_published=True)
+
+
 def index(request):
     news = News.objects.all()
-    context = {
-        'news': news,
-        'title': 'news list',
-    }
+    context = {'news': news, 'title': 'news list',}
     return render(request, "news/index.html", context)
 
 
 def get_category(request, category_id):
-    news = News.objects.filter(category_id=category_id)
+    news = News.objects.filter(category_id=category_id, is_published=True)
     category = Category.objects.get(pk=category_id)
     return render(request, 'news/category.html', {'news':news, 'category': category})
 
