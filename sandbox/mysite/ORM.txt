@@ -1,0 +1,30 @@
+            -==  ORM pt 1 l32  ==-
+
+>>> from news.models import News, Category
+>>> News.objects.all()                      # return QuerySet objects
+>>> News.objects.order_by('-pk')            # ('pk') - order by id
+>>> News.objects.all().reverse()
+>>> News.objects.get(pk=1)                  # only 1 record
+>>> News.objects.get(title='Новость 1')     # by key params
+>>> news1 = _                               # <News: Новость 1>
+>>> news1.is_published                      # True
+>>> news1.category                          # <Category: Культура>
+>>> news1.category.title                    # 'Культура'
+>>> cat4 = Category.objects.get(pk=4)
+>>> cat4.title                              # 'Наука'
+>>> cat4.news_set.all()                     # QuerySet ...
+    >>> cat2 = Category.objects.get(pk=2)
+    >>> cat2.title                          # 'Спорт'
+    >>> cat2.news_set.all()                 # <QuerySet [<News: Новость из формы 5>, ... ]>
+    >>> news = _
+    >>> for item in news:
+    ...     print(item.is_published)
+    ...
+                                           # True
+                                           # False
+                                           # True
+>>> cat2.news_set.all()                    # news_set => related_name="get_news" in model
+
+            -==  ORM pt 2 l33 ==-
+
+>>> ...
