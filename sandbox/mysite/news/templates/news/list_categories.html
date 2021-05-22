@@ -2,6 +2,11 @@
   {{ arg1 }} {{ arg2 }}
   {% for item in categories %}
   <!--<a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>-->
-  <a href="{{ item.get_absolute_url }}" class="list-group-item list-group-item-action">{{ item.title }}</a>
+  <a href="{{ item.get_absolute_url }}" class="list-group-item list-group-item-action">
+    <span class="badge badge-primary badge-pill">
+      {{ item.cnt }}
+    </span>
+    {{ item.title }}
+  </a>
   {% endfor %}
 </div>
