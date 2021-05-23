@@ -35,4 +35,24 @@
 
             -==  ORM pt 3 l34 ==-
 
+>>> News.objects.first()
+>>> News.objects.order_by('pk').first()                     # ...('pk').last()
+>>> cat2 = Category.objects.get(pk=2)
+    >>> news = cat2.news_set.all()
+    >>> newsf = cat2.news_set.filter(is_published=True)     # filtered news
+>>> News.objects.earliest('updated_at')
+>>> News.objects.latest('updated_at')
+>>> cats = Category.objects.filter(pk__in=[1,2])            # filtered choice ==
+    >>> News.objects.filter(category__in=cats)              # filtered choice ==
+>>> cat5 = Category.objects.get(pk=5)
+    >>> cat5.news_set.exists()                              # False
+    >>> cat5.news_set.count()                               # 0 records
+>>> News.objects.count()                                    # 11
+>>> news = News.objects.get(pk=5)
+    >>> news.get_previous_by_created_at()                   # <News: Новость из формы>
+    >>> news.get_next_by_created_at()                       # <News: Новость из формы 3>
+    >>> news.get_next_by_created_at(pk__gt=10)              # <News: Добавление фото после enctype="multipart/form-data">
+
+            -==  ORM pt 4 l35 ==-
+
 >>> ...
