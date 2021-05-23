@@ -27,4 +27,12 @@
 
             -==  ORM pt 2 l33 ==-
 
+>>> News.objects.filter(pk__gt=12)                  # Field lookups - in docs,(greater then 12)
+>>> News.objects.filter(title__contains='new')      # with register (not supported sqlite)
+>>> News.objects.filter(title__icontains='new')     # no register
+>>> News.objects.filter(pk__in=[3, 5, 7])           # search in range
+>>> News.objects.filter(pk__in=[3, 5, 7], title__contains='формы')
+
+            -==  ORM pt 3 l34 ==-
+
 >>> ...
