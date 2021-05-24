@@ -55,4 +55,10 @@
 
             -==  ORM pt 4 l35 ==-
 
->>> ...
+>>> News.objects.filter(category__title='Политика')                        # записи вторичной модели по ключу первичной
+>>> Category.objects.filter(news__title__contains='формы')
+>>> Category.objects.filter(news__is_published__contains=1).count()        # 10
+    # found the necessary solution
+        >>> Category.objects.filter(news__is_published__contains=1).annotate(cnt=Count('news'))
+    # found the necessary solution
+>>> Category.objects.filter(news__title__contains='формы').distinct()      # only unique records
