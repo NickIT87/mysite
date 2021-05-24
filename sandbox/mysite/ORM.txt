@@ -55,10 +55,18 @@
 
             -==  ORM pt 4 l35 ==-
 
->>> News.objects.filter(category__title='Политика')                        # записи вторичной модели по ключу первичной
+>>> News.objects.filter(category__title='Политика')                         # записи вторичной модели по ключу первичной
 >>> Category.objects.filter(news__title__contains='формы')
->>> Category.objects.filter(news__is_published__contains=1).count()        # 10
+>>> Category.objects.filter(news__is_published__contains=1).count()         # 10
     # found the necessary solution
         >>> Category.objects.filter(news__is_published__contains=1).annotate(cnt=Count('news'))
     # found the necessary solution
->>> Category.objects.filter(news__title__contains='формы').distinct()      # only unique records
+>>> Category.objects.filter(news__title__contains='формы').distinct()       # only unique records
+>>> from django.db.models import Q                                          # | or, & and, ~ not
+>>> News.objects.filter(Q(pk__in=[5, 6]) | Q(title__contains='2'))
+    >>> News.objects.filter(Q(pk__in=[5, 6]) | Q(title__contains='5') & ~Q(pk__gt=8))
+    >>> News.objects.filter(Q(pk__in=[5, 6]) | Q(title__contains='2') & ~Q(pk__lt=2))
+
+            -==  ORM pt 5 l36 ==-
+
+>>> ...
