@@ -69,4 +69,17 @@
 
             -==  ORM pt 5 l36 ==-
 
+>>> News.objects.all()[:3]                                          # not supported negative indexes in slices
+>>> News.objects.all()[9:]
+>>> News.objects.all()[3:5]
+>>> from django.db.models import *                                  # Aggregate functions
+>>> News.objects.aggregate(Min('views'), Max('views'))              # {'views__min': 0, 'views__max': 234}
+>>> News.objects.aggregate(min_v=Min('views'), max_v=Max('views'))  # {'min_v': 0, 'max_v': 234}
+>>> News.objects.aggregate(diff=Min('views')-Max('views'))          # {'diff': -234}
+>>> News.objects.aggregate(Sum('views'))                            # {'views__sum': 540}
+>>> News.objects.aggregate(Avg('views'))                            # {'views__avg': 49.09090909090909}
+>>> News.objects.aggregate(Count('views'))                          # {'views__count': 11}
+
+            -==  ORM pt 6 l37 ==-
+
 >>> ...
