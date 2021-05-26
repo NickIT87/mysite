@@ -17,6 +17,7 @@ class HomeNews(ListView):
     model = News
     template_name = "news/home_news_list.html"  # redefine standard template news_list.html
     context_object_name = 'news'
+    #queryset = News.objects.filter(is_published=True).select_related('category')
     #extra_context = {'title': 'news list',}
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -24,8 +25,8 @@ class HomeNews(ListView):
         context['title'] = 'news list'
         return context
 
-    def get_queryset(self):
-        return News.objects.filter(is_published=True)
+    def get_queryset(self):                           # prefetch_related() - many to many
+        return News.objects.filter(is_published=True).select_related('category') # select_related() - foreign key
 
 
 #def get_category(request, category_id):
@@ -46,7 +47,7 @@ class NewsByCategory(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(category_id=self.kwargs['category_id'] , is_published=True)
+        return News.objects.filter(category_id=self.kwargs['category_id'], is_published=True).select_related('category')
 
 
 #def view_news(request, news_id: int):
