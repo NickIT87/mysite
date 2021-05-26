@@ -121,4 +121,7 @@
 
             -==  ORM pt 8 l39 ==-
 
->>> ...
+>>> News.objects.raw("SELECT * FROM news_news")                                         # <RawQuerySet: SELECT * FROM news_news>
+>>> News.objects.raw("SELECT id, title FROM news_news")                                 # be sure to indicate ID
+>>> news = News.objects.raw("SELECT * FROM news_news WHERE title = 'Новость 1'")        # incorrect, danger params, sqlinjection
+>>> news = News.objects.raw("SELECT * FROM news_news WHERE title = %s", ['Новость 1'])  # %s [params]
