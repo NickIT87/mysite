@@ -82,4 +82,22 @@
 
             -==  ORM pt 6 l37 ==-
 
+>>> cats = Category.objects.annotate(Count('news'))
+>>> for item in cats:
+...     print(item.title, item.news__count)
+>>> cats = Category.objects.annotate(cnt=Count('news'))
+>>> for item in cats:
+...     print(item.title, item.cnt)
+>>> cats = Category.objects.annotate(max_views=Max('news__views'))
+>>> for item in cats:
+...     print(item.title, item.max_views)
+>>> cats = Category.objects.annotate(sum_views=Sum('news__views'))
+>>> for item in cats:
+...     print(item.title, item.sum_views)
+>>> Category.objects.annotate(cnt=Count('news')).filter(cnt__gt=0)              # ! completed task
+>>> News.objects.aggregate(cnt=Count('views'))                                  # {'cnt': 11}
+>>> News.objects.aggregate(cnt=Count('views', distinct=True))                   # {'cnt': 9}
+
+            -==  ORM pt 7 l38 ==-
+
 >>> ...
