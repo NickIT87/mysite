@@ -100,4 +100,25 @@
 
             -==  ORM pt 7 l38 ==-
 
+>>> news1 = News.objects.values('title', 'views').get(pk=1)
+>>> news1['title']                                                      # 'Новость 1'
+>>> from django.db import connection
+>>> news = News.objects.values('title', 'views', 'category__title')
+>>> connection.queries                                                  # view sql queries
+>>> from django.db import reset_queries
+>>> reset_queries()
+>>> from django.db.models import F                                      #
+>>> news1 = News.objects.get(pk=1)
+>>> news1.views                                                         # 9
+>>> news1.views = F('views') + 1
+>>> news1.save()                                                        # 10 <CombinedExpression: F(views) + Value(1)>
+>>> News.objects.filter(content__icontains=F('title'))                  # <QuerySet [<News: Новость из формы после миграции с добавлением просмотра>, <News: Новость 1>]>
+    # database functions - docs
+>>> from django.db.models.functions import Length
+>>> news = News.objects.annotate(length=Length('title')).all()
+>>> for item in news:
+...     print(item.title, item.length)
+
+            -==  ORM pt 8 l39 ==-
+
 >>> ...
