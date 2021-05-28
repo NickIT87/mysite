@@ -31,6 +31,7 @@ class HomeNews(MyMixin, ListView):
     #queryset = News.objects.filter(is_published=True).select_related('category')
     #extra_context = {'title': 'news list',}
     mixin_prop = 'mixin prop'
+    paginate_by = 2
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,6 +54,7 @@ class NewsByCategory(MyMixin, ListView):
     template_name = "news/home_news_list.html"  # redefine standard template news_list.html
     context_object_name = 'news'
     allow_empty = False
+    paginate_by = 2
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
