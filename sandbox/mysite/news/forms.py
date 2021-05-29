@@ -8,6 +8,11 @@ from django.contrib.auth.models import User
 from  .models import News
 
 
+class ContactForm(forms.Form):
+    subject = forms.CharField(label='Тема', widget=forms.TextInput(attrs={'class':'form-control'}))
+    content = forms.CharField(label='Текст', widget=forms.Textarea(attrs={'class': 'form-control', 'rows':5}))
+
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
         max_length=150,

@@ -7,6 +7,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
     path('logout/', user_logout, name='logout'),
+    path('mail/', mail_sender, name='mail'),
     path('test/', test, name='test'),
     #path('', index, name='home'),
     path('', HomeNews.as_view(), name='home'),

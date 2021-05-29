@@ -5,9 +5,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 from .models import News, Category
-from .forms import NewsForm, UserRegisterForm, UserLoginForm
+from .forms import NewsForm, UserRegisterForm, UserLoginForm, ContactForm
 from .utils import MyMixin
 
 
@@ -42,6 +44,29 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
+
+@login_required
+def mail_sender(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(
+                form.cleaned_data['subject'],
+                form.cleaned_data['content'],
+                'elanir358@gmail.com',
+                ['Nickolazz@protonmail.com'],
+                fail_silently=True)
+            if mail:
+                messages.success(request, 'Письмо отправлено')
+                return redirect('mail')
+            else:
+                messages.error(request, 'Ошибка отправки')
+        else:
+            messages.error(request, 'Форма не валидна')
+    else:
+        form = ContactForm()
+    return render(request, 'news/mail.html', {'form':form})
 
 
 def test(request):
