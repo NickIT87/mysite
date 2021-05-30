@@ -47,7 +47,7 @@ def user_logout(request):
 
 
 @login_required
-def mail_sender(request):
+def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -59,14 +59,14 @@ def mail_sender(request):
                 fail_silently=True)
             if mail:
                 messages.success(request, 'Письмо отправлено')
-                return redirect('mail')
+                return redirect('contact')
             else:
                 messages.error(request, 'Ошибка отправки')
         else:
             messages.error(request, 'Форма не валидна')
     else:
         form = ContactForm()
-    return render(request, 'news/mail.html', {'form':form})
+    return render(request, 'news/contact.html', {'form':form})
 
 
 def test(request):
