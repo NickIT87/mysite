@@ -1,9 +1,9 @@
-from django.contrib import admin
 from django.forms import ModelChoiceField, ModelForm
+from django.contrib import admin
 
 from .models import *
 
-# Register your models here.
+
 class SmartphoneAdminForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -29,6 +29,7 @@ class NotebookAdmin(admin.ModelAdmin):
 
 
 class SmartphoneAdmin(admin.ModelAdmin):
+
     change_form_template = 'admin.html'
     form = SmartphoneAdminForm
 
@@ -44,3 +45,5 @@ admin.site.register(Smartphone, SmartphoneAdmin)
 admin.site.register(CartProduct)
 admin.site.register(Cart)
 admin.site.register(Customer)
+admin.site.register(Order)
+
