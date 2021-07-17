@@ -4,7 +4,9 @@ from rest_framework.response import Response
 
 
 class TesView(APIView):
-    pass
-
-
-
+    def get(self, request, *args, **kwargs):
+        data = {
+            'username': 'admin',
+            'no_of_years_active': 10
+        }
+        return Response(data)
