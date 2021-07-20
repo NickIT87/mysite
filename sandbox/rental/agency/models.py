@@ -4,6 +4,9 @@ from django.db import models
 class Product(models.Model):
     title = models.TextField()
 
+    def delete(self):
+        print("deleted somethingsdfgsdfgd")
+
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery')
