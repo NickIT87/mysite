@@ -1,16 +1,73 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
-# Create your models here.
-class Product(models.Model):
-    title = models.TextField()
+# DB models here.
+class Apartment(models.Model):
+    # SLUG CONSTANTS
+    # business proposal
+    SALE = 'Продажа'
+    LEASE = 'Аренда'
+    CHANGE = 'Обмен'
+    PROP_CHOICES = [(SALE, 'Продажа'), (LEASE, 'Aренда'), (CHANGE, 'Обмен')]
+    # bathroom type
+    ADJACENT = 'Смежный'
+    SEPARATED = 'Раздельный'
+    BATHROOM_CHOICE = [(ADJACENT, 'Смежный'), (SEPARATED, 'Раздельный')]
+    # window type
+    PLASTIC = 'Пластик профиль'
+    WOOD = 'Дерево профиль'
+    STANDARD = 'Стандартная комплектация'
+    WINDOW_CHOICE = [(PLASTIC, 'Пластик профиль'),(WOOD, 'Дерево профиль'),(STANDARD, 'Стандартная комплектация')]
+    # balcony type
+    OPEN_BALCONY = 'Открытого типа'
+    GLAZED_BALCONY = 'Застеклен'
+    GLAZED_AND_INSULATED = 'Застеклен и утеплен'
+    NO_BALCONY = 'Отсутствует'
+    BALCONY_CHOICE = [
+        (OPEN_BALCONY, 'Открытого типа'),
+        (GLAZED_BALCONY, 'Застеклен'),
+        (GLAZED_AND_INSULATED, 'Застеклен и утеплен'),
+        (NO_BALCONY, 'Отсутствует')
+    ]
+    # room condition
+    BASIC_REPAIR = 'Базовый ремонт'
+    FULL_REPAIR = 'Полный ремонт'
+    NO_REPAIR = 'Требуется ремонт'
+    ROOM_CONDITION = [(BASIC_REPAIR, 'Базовый ремонт'), (FULL_REPAIR, 'Полный ремонт'), (NO_REPAIR, 'Требуется ремонт')]
 
+    # MODEL FIELDS
+    slug_title = 'Flat'
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
+    price = models.FloatField(verbose_name='Цена $')
+    number_of_rooms = models.PositiveSmallIntegerField(
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(10)], verbose_name='Кол-во комнат'
+    )
+    floor_number = models.PositiveSmallIntegerField(
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(25)], verbose_name='Этаж'
+    )
+    total_floor_number = models.PositiveSmallIntegerField(
+        default=10, validators=[MinValueValidator(1), MaxValueValidator(25)], verbose_name='Всего этажей'
+    )
+    bathroom = models.CharField(max_length=10, choices=BATHROOM_CHOICE, default=SEPARATED, verbose_name='Туалет')
+    window_type = models.CharField(max_length=25, choices=WINDOW_CHOICE, default=PLASTIC, verbose_name='Окна')
+    balcony = models.CharField(max_length=20, choices=BALCONY_CHOICE, default=GLAZED_BALCONY, verbose_name='Балкон')
+    room_condition = models.CharField(max_length=20, choices=ROOM_CONDITION, default=FULL_REPAIR, verbose_name='Ремонт')
+    total_area = models.FloatField(
+        default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
+    )
+    address = models.CharField(max_length=250, verbose_name='Адрес')
+    description = models.TextField(blank=True, verbose_name='Описание')
+
+    # METHODS
     def delete(self):
         print("deleted somethingsdfgsdfgd")
 
 
 class Gallery(models.Model):
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='gallery')
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
 
     def delete(self):
         self.image.delete()
