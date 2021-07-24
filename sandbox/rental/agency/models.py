@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+import uuid
 
 # DB models here.
 class Apartment(models.Model):
@@ -64,11 +65,23 @@ class Apartment(models.Model):
     def delete(self):
         print("deleted somethingsdfgsdfgd")
 
+    def __str__(self):
+        return  self.slug_title
+
 
 class Gallery(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='gallery')
+    data_id = uuid.uuid4()
+    dt_id = models.CharField(max_length=200, default=data_id, editable=False)
+    image = models.ImageField(upload_to='gallery/' + str(data_id))
+
 
     def delete(self):
         self.image.delete()
         super().delete()
+
+
+# my_product = Product()
+# my_product.images.all()  где images - related name
+# Gallery.objects.filter(product=my_product)
+# {{ object.images.all }}    {% for image in object.images.all %}
