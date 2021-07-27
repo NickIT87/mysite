@@ -1,9 +1,5 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
-import uuid
-import os
-from django.db.models import ImageField, signals
-from django.dispatch import Signal
 
 
 # DB models here.
@@ -67,22 +63,20 @@ class Apartment(models.Model):
 
     # METHODS
     def delete(self):
-        print("deleted somethingsdfgsdfgd")
+        print("deleted from Class Apartment")
 
     def __str__(self):
         return  self.slug_title
 
 
-def get_member_upload_to(instance, filename):
+def get_apartment_dynamic_path_upload_to(instance, filename):
     #new_filename = '{}.{}'.format(uuid.uuid4, filename.split('.')[-1])
-    return "photos/members/{}/{}".format(instance.apartment.id, filename)
+    return "photos/apartments/{}/{}".format(instance.apartment.id, filename)
 
 
-class Gallery(models.Model):
+class ApartmentGallery(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='images')
-    #data_id = uuid.uuid4()
-    #dt_id = models.CharField(max_length=200, default=data_id, editable=False)
-    image = models.ImageField(upload_to=get_member_upload_to)
+    image = models.ImageField(upload_to=get_apartment_dynamic_path_upload_to)
 
     def delete(self):
         self.image.delete()

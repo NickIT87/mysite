@@ -3,20 +3,20 @@ from .models import *
 
 
 def delete_model(modeladmin, request, queryset):
-    print('delete SOMETHINGa')
+    print('delete from admin delete_model')
     print(modeladmin)
     print(request)
     print(queryset)
 
 # Register your models here.
-class GalleryInline(admin.TabularInline):
+class ApartmentGalleryInline(admin.TabularInline):
     fk_name = 'apartment'
-    model = Gallery
+    model = ApartmentGallery
 
 
 @admin.register(Apartment)
 class ApartmentAdmin(admin.ModelAdmin):
-    inlines = [GalleryInline,]
+    inlines = [ApartmentGalleryInline,]
     actions = [delete_model]
 
     def delete_queryset(self, request, queryset):
