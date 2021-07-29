@@ -62,25 +62,25 @@ class Apartment(models.Model):
     description = models.TextField(blank=True, verbose_name='Описание')
 
     # METHODS
-    def delete(self):
-        print("deleted from Class Apartment")
+    # def delete(self):
+    #     print("deleted from Class Apartment")
 
     def __str__(self):
         return  self.slug_title
 
 
-def get_apartment_dynamic_path_upload_to(instance, filename):
-    #new_filename = '{}.{}'.format(uuid.uuid4, filename.split('.')[-1])
-    return "photos/apartments/{}/{}".format(instance.apartment.id, filename)
+# def get_apartment_dynamic_path_upload_to(instance, filename):
+#     #new_filename = '{}.{}'.format(uuid.uuid4, filename.split('.')[-1])
+#     return "photos/apartments/{}/{}".format(instance.apartment.id, filename)
 
 
 class ApartmentGallery(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to=get_apartment_dynamic_path_upload_to)
+    image = models.ImageField(upload_to="apartments/")
 
-    def delete(self):
-        self.image.delete()
-        super().delete()
+    # def delete(self):
+    #     self.image.delete()
+    #     super().delete()
 
 
 # my_product = Product()
