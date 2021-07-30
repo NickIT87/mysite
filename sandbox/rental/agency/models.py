@@ -37,7 +37,7 @@ class Apartment(models.Model):
     ROOM_CONDITION = [(BASIC_REPAIR, 'Базовый ремонт'), (FULL_REPAIR, 'Полный ремонт'), (NO_REPAIR, 'Требуется ремонт')]
 
     # MODEL FIELDS
-    slug_title = 'Flat'
+    slug_title = 'Apartment'
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
@@ -48,7 +48,7 @@ class Apartment(models.Model):
     floor_number = models.PositiveSmallIntegerField(
         default=1, validators=[MinValueValidator(1), MaxValueValidator(25)], verbose_name='Этаж'
     )
-    total_floor_number = models.PositiveSmallIntegerField(
+    total_floors_number = models.PositiveSmallIntegerField(
         default=10, validators=[MinValueValidator(1), MaxValueValidator(25)], verbose_name='Всего этажей'
     )
     bathroom = models.CharField(max_length=10, choices=BATHROOM_CHOICE, default=SEPARATED, verbose_name='Туалет')
@@ -66,7 +66,7 @@ class Apartment(models.Model):
     #     print("deleted from Class Apartment")
 
     def __str__(self):
-        return  self.slug_title
+        return  self.slug_title + '_' + self.address
 
 
 # def get_apartment_dynamic_path_upload_to(instance, filename):
@@ -87,3 +87,61 @@ class ApartmentGallery(models.Model):
 # my_product.images.all()  где images - related name
 # Gallery.objects.filter(product=my_product)
 # {{ object.images.all }}    {% for image in object.images.all %}
+
+
+class House(models.Model):
+    # SLUG CONSTANTS
+    # business proposal
+    SALE = 'Продажа'
+    LEASE = 'Аренда'
+    CHANGE = 'Обмен'
+    PROP_CHOICES = [(SALE, 'Продажа'), (LEASE, 'Aренда'), (CHANGE, 'Обмен')]
+    # window type
+    PLASTIC = 'Пластик'
+    WOOD = 'Дерево'
+    WINDOW_CHOICE = [(PLASTIC, 'Пластик'), (WOOD, 'Дерево')]
+    # house condition
+    BASIC_REPAIR = 'Базовый ремонт'
+    FULL_REPAIR = 'Полный ремонт'
+    NO_REPAIR = 'Требуется ремонт'
+    HOUSE_CONDITION = [(BASIC_REPAIR, 'Базовый ремонт'), (FULL_REPAIR, 'Полный ремонт'), (NO_REPAIR, 'Требуется ремонт')]
+    # residential condition
+    RESIDENTIAL = 'Жилой'
+    NOT_RESIDENTIAL = 'Не жилой'
+    RESIDENTIAL_CONDITION = [(RESIDENTIAL, 'Жилой'), (NOT_RESIDENTIAL, 'Не жилой')]
+    # MODEL FIELDS
+    slug_title = 'House'
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
+    price = models.FloatField(verbose_name='Цена $')
+    number_of_rooms = models.PositiveSmallIntegerField(
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(10)], verbose_name='Кол-во комнат'
+    )
+    total_floors_number = models.PositiveSmallIntegerField(
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(25)], verbose_name='Всего этажей'
+    )
+    window_type = models.CharField(max_length=25, choices=WINDOW_CHOICE, default=PLASTIC, verbose_name='Окна')
+    house_condition = models.CharField(
+        max_length=20, choices=HOUSE_CONDITION, default=FULL_REPAIR, verbose_name='Ремонт'
+    )
+    resident_condition = models.CharField(
+        max_length=8, choices=RESIDENTIAL_CONDITION, default=RESIDENTIAL, verbose_name='Состояние'
+    )
+    total_area = models.FloatField(
+        default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
+    )
+    garden_plot_size = models.FloatField(verbose_name='Размер садового участка сот.')
+    basement = models.BooleanField(default=True, verbose_name='Подвал?')
+    household_buildings = models.BooleanField(default=True, verbose_name='Хоз. постройки?')
+    draw_well = models.BooleanField(default=True, verbose_name='Колодец?')
+    address = models.CharField(max_length=250, verbose_name='Адрес')
+    description = models.TextField(blank=True, verbose_name='Описание')
+
+    def __str__(self):
+        return  self.slug_title + '_' + self.address
+
+
+class HouseGallery(models.Model):
+    house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to="houses/")

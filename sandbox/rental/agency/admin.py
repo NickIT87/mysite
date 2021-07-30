@@ -36,3 +36,13 @@ class ApartmentAdmin(admin.ModelAdmin):
     #     print('==========================delete_model==========================')
 
 #admin.site.register(Gallery)
+
+
+class HouseGalleryInline(admin.TabularInline):
+    fk_name = 'house'
+    model = HouseGallery
+
+
+@admin.register(House)
+class HouseAdmin(admin.ModelAdmin):
+    inlines = [HouseGalleryInline,]
