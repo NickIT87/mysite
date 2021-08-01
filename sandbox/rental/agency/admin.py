@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import Apartment, ApartmentGallery, House, HouseGallery, LandPlot, CommercialStructure, Garage
 
 
 # def delete_model(modeladmin, request, queryset):
@@ -35,8 +35,6 @@ class ApartmentAdmin(admin.ModelAdmin):
     #     """you can do anything here AFTER deleting the object"""
     #     print('==========================delete_model==========================')
 
-#admin.site.register(Gallery)
-
 
 class HouseGalleryInline(admin.TabularInline):
     fk_name = 'house'
@@ -46,3 +44,8 @@ class HouseGalleryInline(admin.TabularInline):
 @admin.register(House)
 class HouseAdmin(admin.ModelAdmin):
     inlines = [HouseGalleryInline,]
+
+
+admin.site.register(LandPlot)
+admin.site.register(CommercialStructure)
+admin.site.register(Garage)

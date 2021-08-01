@@ -2,14 +2,17 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
+# SLUG CONSTANTS
+# business proposal
+_SALE = 'Продажа'
+_LEASE = 'Аренда'
+_CHANGE = 'Обмен'
+_PROP_CHOICES = [(_SALE, 'Продажа'), (_LEASE, 'Aренда'), (_CHANGE, 'Обмен')]
+
+
 # DB models here.
 class Apartment(models.Model):
     # SLUG CONSTANTS
-    # business proposal
-    SALE = 'Продажа'
-    LEASE = 'Аренда'
-    CHANGE = 'Обмен'
-    PROP_CHOICES = [(SALE, 'Продажа'), (LEASE, 'Aренда'), (CHANGE, 'Обмен')]
     # bathroom type
     ADJACENT = 'Смежный'
     SEPARATED = 'Раздельный'
@@ -40,7 +43,7 @@ class Apartment(models.Model):
     slug_title = 'Apartment'
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-    proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
+    proposal_type = models.CharField(max_length=7, choices=_PROP_CHOICES, default=_SALE, verbose_name='Тип предложения')
     price = models.FloatField(verbose_name='Цена $')
     number_of_rooms = models.PositiveSmallIntegerField(
         default=1, validators=[MinValueValidator(1), MaxValueValidator(10)], verbose_name='Кол-во комнат'
@@ -91,11 +94,6 @@ class ApartmentGallery(models.Model):
 
 class House(models.Model):
     # SLUG CONSTANTS
-    # business proposal
-    SALE = 'Продажа'
-    LEASE = 'Аренда'
-    CHANGE = 'Обмен'
-    PROP_CHOICES = [(SALE, 'Продажа'), (LEASE, 'Aренда'), (CHANGE, 'Обмен')]
     # window type
     PLASTIC = 'Пластик'
     WOOD = 'Дерево'
@@ -113,7 +111,7 @@ class House(models.Model):
     slug_title = 'House'
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-    proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
+    proposal_type = models.CharField(max_length=7, choices=_PROP_CHOICES, default=_SALE, verbose_name='Тип предложения')
     price = models.FloatField(verbose_name='Цена $')
     number_of_rooms = models.PositiveSmallIntegerField(
         default=1, validators=[MinValueValidator(1), MaxValueValidator(10)], verbose_name='Кол-во комнат'
@@ -148,27 +146,44 @@ class HouseGallery(models.Model):
 
 
 class LandPlot(models.Model):
-    # SLUG CONSTANTS
-    # business proposal
-    SALE = 'Продажа'
-    LEASE = 'Аренда'
-    CHANGE = 'Обмен'
-    PROP_CHOICES = [(SALE, 'Продажа'), (LEASE, 'Aренда'), (CHANGE, 'Обмен')]
     # MODEL FIELDS
     slug_title = 'LandPlot'
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
-    proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
+    proposal_type = models.CharField(max_length=7, choices=_PROP_CHOICES, default=_SALE, verbose_name='Тип предложения')
     price = models.FloatField(verbose_name='Цена $')
     size = models.FloatField(verbose_name='Размер земельного участка сот.')
     address = models.CharField(max_length=250, verbose_name='Адрес')
     description = models.TextField(blank=True, verbose_name='Описание')
-    image = models.ImageField(upload_to="LandPlots/", verbose_name='Фото земельного участка')
+    image = models.ImageField(upload_to="LandPlots/", blank=True, verbose_name='Фото земельного участка')
 
 
 class CommercialStructure(models.Model):
-    pass
+    # MODEL FIELDS
+    slug_title = 'CommercialStructure'
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    proposal_type = models.CharField(max_length=7, choices=_PROP_CHOICES, default=_SALE, verbose_name='Тип предложения')
+    floor_number = models.PositiveSmallIntegerField(
+        default=1, validators=[MinValueValidator(1), MaxValueValidator(25)], verbose_name='Этаж'
+    )
+    total_area = models.FloatField(
+        default=30.0, validators=[MinValueValidator(10.0), MaxValueValidator(500.0)], verbose_name='Общая площадь кв.м'
+    )
+    address = models.CharField(max_length=250, verbose_name='Адрес')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    image = models.ImageField(upload_to="CommercialStructures/", blank=True, verbose_name='Фото')
 
 
 class Garage(models.Model):
-    pass
+    # MODEL FIELDS
+    slug_title = 'Garage'
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    proposal_type = models.CharField(max_length=7, choices=_PROP_CHOICES, default=_SALE, verbose_name='Тип предложения')
+    total_area = models.FloatField(
+        default=10.0, validators=[MinValueValidator(3.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
+    )
+    address = models.CharField(max_length=250, verbose_name='Адрес')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    image = models.ImageField(upload_to="CommercialStructures/", blank=True,  verbose_name='Фото')
