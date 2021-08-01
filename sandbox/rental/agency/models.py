@@ -145,3 +145,30 @@ class House(models.Model):
 class HouseGallery(models.Model):
     house = models.ForeignKey(House, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to="houses/")
+
+
+class LandPlot(models.Model):
+    # SLUG CONSTANTS
+    # business proposal
+    SALE = 'Продажа'
+    LEASE = 'Аренда'
+    CHANGE = 'Обмен'
+    PROP_CHOICES = [(SALE, 'Продажа'), (LEASE, 'Aренда'), (CHANGE, 'Обмен')]
+    # MODEL FIELDS
+    slug_title = 'LandPlot'
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
+    proposal_type = models.CharField(max_length=7, choices=PROP_CHOICES, default=SALE, verbose_name='Тип предложения')
+    price = models.FloatField(verbose_name='Цена $')
+    size = models.FloatField(verbose_name='Размер земельного участка сот.')
+    address = models.CharField(max_length=250, verbose_name='Адрес')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    image = models.ImageField(upload_to="LandPlots/", verbose_name='Фото земельного участка')
+
+
+class CommercialStructure(models.Model):
+    pass
+
+
+class Garage(models.Model):
+    pass
