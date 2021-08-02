@@ -5,30 +5,19 @@
     <meta charset="UTF-8">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <!-- materialize icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
      <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title>{% block title %}Index Rental{% endblock %}</title>
 </head>
 <body>
-<header>
+<!-- HEADER INCLUDE -->
 {% include 'inc/_nav.html' %}
-</header>
-
+<!-- MAIN CONTENT INCLUDE -->
 <main>
-
     {% block content %}CONTENT{% endblock %}
-
-
-    <h1>Rental</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
-
 </main>
-
 <!-- FOOTER INCLUDE -->
 {% include 'inc/_footer.html' %}
 <!-- Compiled and minified JavaScript -->
