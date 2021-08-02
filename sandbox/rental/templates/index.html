@@ -1,10 +1,40 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+     <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>{% block title %}Index Rental{% endblock %}</title>
 </head>
 <body>
-<h1>Rental</h1>
+<header>
+{% include 'inc/_nav.html' %}
+</header>
+
+<main>
+
+    {% block content %}CONTENT{% endblock %}
+
+
+    <h1>Rental</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A beatae consectetur doloribus facere fuga, incidunt nostrum quisquam repellendus? Aliquid aut blanditiis delectus illo numquam. Delectus nulla perspiciatis possimus sint tempore.</p>
+
+</main>
+
+<!-- FOOTER INCLUDE -->
+{% include 'inc/_footer.html' %}
+<!-- Compiled and minified JavaScript -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- Custom JS -->
+<script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
