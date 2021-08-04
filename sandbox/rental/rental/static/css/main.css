@@ -8,8 +8,29 @@ main {
     flex: 1 0 auto;
 }
 
+.mainTitle{
+    text-align: center;
+    #background-color: #ffc;
+    margin-top: 150px;
+    margin-bottom: 200px;
+}
+.siteTitle {
+    font-family: 'Rubik Mono One', sans-serif;
+    color: #90caf9;
+    text-shadow: 2px 2px 2px black;
+    margin-bottom: 100px;
+}
 .AgencyName {
-    color: blue;
+    font-family: 'Play', sans-serif;
+    color: #64b5f6;
+    text-shadow: 4px 4px 4px black;
+    margin-bottom: 100px;
+}
+.AgencySlogan {
+    margin-top: 120px;
+    font-family: 'Marck Script', cursive;
+    color: #e57373;
+    text-shadow: 1px 1px 2px black;
 }
 
 .imgLNK {
