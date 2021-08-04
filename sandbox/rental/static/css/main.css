@@ -7,3 +7,20 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.AgencyName {
+    color: blue;
+}
+
+.imgLNK {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 200px;
+    transition: 1s; /* Время эффекта */
+}
+
+.imgLNK:hover {
+    transform: scale(1.2); /* Увеличиваем масштаб */
+}
