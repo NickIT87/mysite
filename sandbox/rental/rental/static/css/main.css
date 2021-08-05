@@ -45,3 +45,15 @@ main {
 .imgLNK:hover {
     transform: scale(1.2); /* Увеличиваем масштаб */
 }
+
+.footerLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50px;
+    transition: 1s; /* Время эффекта */
+}
+
+.footerLogo:hover {
+    transform: scale(1.2); /* Увеличиваем масштаб */
+}
