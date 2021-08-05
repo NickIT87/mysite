@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block title %}
+  {{title}} - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+{% for item in flats %}
+  <p>{{ item.address }}</p>
+{% endfor %}
+
+{% endblock %}
