@@ -10,6 +10,9 @@
 
 {% for item in flats %}
   <p>{{ item.address }}</p>
+  {% for photo in item.images.all %}
+    <img src="{{ photo.image.url }}">
+  {% endfor %}
 {% endfor %}
 
 {% endblock %}
