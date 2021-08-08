@@ -55,3 +55,17 @@ class ApartmentsAllRentalView(ListView):
 
     def get_queryset(self):
         return Apartment.objects.filter(proposal_type='Аренда')
+
+
+class ApartmentsAllExchangeView(ListView):
+    model = Apartment
+    template_name = "agency/apartments.html"
+    context_object_name = 'flats'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Квартиры обмен"
+        return context
+
+    def get_queryset(self):
+        return Apartment.objects.filter(proposal_type='Обмен')

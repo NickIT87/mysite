@@ -13,6 +13,11 @@
         </div>
         <div class="col s12 m12 l9">
             <div class="row">
+                {% if not flats %}
+                <div class="col s12">
+                    <h4>Предложения данной категории отсутствуют!</h4>
+                </div>
+                {% endif %}
                 {% for item in flats %}
                 <div class="col s12 m6 l4">
                     <div class="card sticky-action" style="height: 400px;">

@@ -61,8 +61,8 @@ class Apartment(models.Model):
     total_area = models.FloatField(
         default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
     )
-    address = models.CharField(max_length=250, verbose_name='Адрес')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    address = models.CharField(max_length=65, verbose_name='Адрес')
+    description = models.TextField(blank=True, max_length=400, verbose_name='Описание')
 
     # METHODS
     # def delete(self):
@@ -133,8 +133,8 @@ class House(models.Model):
     basement = models.BooleanField(default=True, verbose_name='Подвал?')
     household_buildings = models.BooleanField(default=True, verbose_name='Хоз. постройки?')
     draw_well = models.BooleanField(default=True, verbose_name='Колодец?')
-    address = models.CharField(max_length=250, verbose_name='Адрес')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    address = models.CharField(max_length=65, verbose_name='Адрес')
+    description = models.TextField(blank=True, max_length=400, verbose_name='Описание')
 
     def __str__(self):
         return  self.slug_title + '_' + self.address
@@ -153,8 +153,8 @@ class LandPlot(models.Model):
     proposal_type = models.CharField(max_length=7, choices=_PROP_CHOICES, default=_SALE, verbose_name='Тип предложения')
     price = models.FloatField(verbose_name='Цена $')
     size = models.FloatField(verbose_name='Размер земельного участка сот.')
-    address = models.CharField(max_length=250, verbose_name='Адрес')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    address = models.CharField(max_length=65, verbose_name='Адрес')
+    description = models.TextField(blank=True, max_length=400, verbose_name='Описание')
     image = models.ImageField(upload_to="LandPlots/", blank=True, verbose_name='Фото земельного участка')
 
 
@@ -170,8 +170,8 @@ class CommercialStructure(models.Model):
     total_area = models.FloatField(
         default=30.0, validators=[MinValueValidator(10.0), MaxValueValidator(500.0)], verbose_name='Общая площадь кв.м'
     )
-    address = models.CharField(max_length=250, verbose_name='Адрес')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    address = models.CharField(max_length=65, verbose_name='Адрес')
+    description = models.TextField(blank=True, max_length=400, verbose_name='Описание')
     image = models.ImageField(upload_to="CommercialStructures/", blank=True, verbose_name='Фото')
 
 
@@ -184,6 +184,6 @@ class Garage(models.Model):
     total_area = models.FloatField(
         default=10.0, validators=[MinValueValidator(3.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
     )
-    address = models.CharField(max_length=250, verbose_name='Адрес')
-    description = models.TextField(blank=True, verbose_name='Описание')
+    address = models.CharField(max_length=65, verbose_name='Адрес')
+    description = models.TextField(blank=True, max_length=400, verbose_name='Описание')
     image = models.ImageField(upload_to="CommercialStructures/", blank=True,  verbose_name='Фото')
