@@ -19,6 +19,7 @@ class ApartmentsView(ListView):
     model = Apartment
     template_name = "agency/apartments.html"
     context_object_name = 'flats'
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,6 +34,7 @@ class ApartmentsAllSaleView(ListView):
     model = Apartment
     template_name = "agency/apartments.html"
     context_object_name = 'flats'
+    paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

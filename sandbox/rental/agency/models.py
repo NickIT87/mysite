@@ -59,10 +59,11 @@ class Apartment(models.Model):
     balcony = models.CharField(max_length=20, choices=BALCONY_CHOICE, default=GLAZED_BALCONY, verbose_name='Балкон')
     room_condition = models.CharField(max_length=20, choices=ROOM_CONDITION, default=FULL_REPAIR, verbose_name='Ремонт')
     total_area = models.FloatField(
-        default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
+        default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(400.0)], verbose_name='Общая площадь кв.м'
     )
     address = models.CharField(max_length=65, verbose_name='Адрес')
     description = models.TextField(blank=True, max_length=400, verbose_name='Описание')
+    #cover_image = models.ImageField(upload_to="apartments/", width_field='640', height_field='480', blank=True, verbose_name='базовое изображение')
 
     # METHODS
     # def delete(self):
@@ -127,7 +128,7 @@ class House(models.Model):
         max_length=8, choices=RESIDENTIAL_CONDITION, default=RESIDENTIAL, verbose_name='Состояние'
     )
     total_area = models.FloatField(
-        default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(200.0)], verbose_name='Общая площадь кв.м'
+        default=10.0, validators=[MinValueValidator(10.0), MaxValueValidator(400.0)], verbose_name='Общая площадь кв.м'
     )
     garden_plot_size = models.FloatField(verbose_name='Размер садового участка сот.')
     basement = models.BooleanField(default=True, verbose_name='Подвал?')
