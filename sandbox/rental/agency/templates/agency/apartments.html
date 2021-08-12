@@ -21,7 +21,7 @@
             <div class="row">
                 {% for item in flats %}
                 <div class="col s12 m6 l4">
-                    <div class="card sticky-action">
+                    <div class="card sticky-action" style="height: 450px;">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="{{ item.images.first.image.url }}">
                         </div>
@@ -33,11 +33,10 @@
                             <p>{{ item.slug_title }}, комнат: {{ item.number_of_rooms }}</p>
                             <p>{{ item.address }}</p>
                             <!--<p>{{ forloop.counter }}</p>-->
-                            <br>
-                            <a href="#" style="color: #448aff;">Подробнее</a>
                         </div>
                         <div class="card-reveal">
                             <span class="card-title grey-text text-darken-4">Цена: {{ item.price }} $<i class="material-icons right">close</i></span>
+                            <a href="#" style="color: #448aff;">Подробнее</a>
                             <p>{{ item.description }}</p>
                         </div>
                         <!--
