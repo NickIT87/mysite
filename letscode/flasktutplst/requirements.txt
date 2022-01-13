@@ -40,7 +40,7 @@ jsmin==2.2.2
 loginform==1.2.0
 lxml==4.5.2
 MarkupSafe==1.1.1
-Pillow==7.1.2
+Pillow==9.0.0
 pytz==2019.2
 six==1.15.0
 SQLAlchemy==1.3.18
