@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework.generics import ListAPIView
 
-# Create your views here.
+from core.models import Currency
+
+
+class CurrencyListAPIView(ListAPIView):
+    queryset = Currency.objects.all()
