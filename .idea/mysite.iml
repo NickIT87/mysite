@@ -7,8 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/myshop/shop" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/REST/drfproj" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sandbox/rental" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/REST/piggybank" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
