@@ -51,5 +51,5 @@ Unidecode==1.1.1
 users==1.0.dev0
 views==0.3
 webencodings==0.5.1
-Werkzeug==1.0.1
+Werkzeug==2.2.3
 WTForms==2.3.1
