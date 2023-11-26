@@ -1,3 +1,15 @@
 /* Your code goes here */
+.container {
+    display: flex;
+    /* flex-direction: row; */
+    /* flex-direction: row-reverse; */
+    /* flex-direction: column; */
+    flex-direction: column-reverse;
+    float: right;
+    border: 1px solid #fff;
+    width: 100%;
+}
 
-
+.container div {
+    float: right;
+}
