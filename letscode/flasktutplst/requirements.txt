@@ -38,7 +38,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 jsmin==2.2.2
 loginform==1.2.0
-lxml==4.5.2
+lxml==4.9.1
 MarkupSafe==1.1.1
 Pillow==7.1.2
 pytz==2019.2
