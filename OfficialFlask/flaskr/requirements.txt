@@ -3,7 +3,7 @@ click==7.1.2
 dj-database-url==0.5.0
 Django==3.0.6
 django-classy-tags==1.0.0
-django-cms==3.7.3
+django-cms==3.7.4
 django-filer==1.7.1
 django-formtools==2.2
 django-js-asset==1.2.2
